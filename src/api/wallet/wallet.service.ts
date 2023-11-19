@@ -3,7 +3,7 @@ import { ProcessorService } from "@/api/processor/processor.service";
 import { TransactionDto } from "@/dto";
 import { InjectModel } from "@nestjs/mongoose";
 import { Customer, CustomerDocument } from "@/models";
-import { Model } from "mongoose";
+import { Document, Model } from "mongoose";
 
 @Injectable()
 export class WalletService {
@@ -54,20 +54,17 @@ export class WalletService {
     if (!customer) {
       throw new NotFoundException(`Customer with ID ${id} not found`);
     }
-    return {
-      customerId: customer.id,
-      balance: customer.balance,
-    };
+    return customer;
   }
 
-  async deleteCustomer(id: string): Promise<void> {
+  async deleteCustomer(id: string): Promise<any> {
     const result = await this.customerModel.deleteOne({ _id: id });
-    if (result.deletedCount === 0) {
+    if (result.deletedCount === 0)
       throw new NotFoundException(`Customer with ID ${id} not found`);
-    }
+    else return result;
   }
 
-  async updateCustomer(id: string, data: any): Promise<void> {
+  async updateCustomer(id: string, data: any): Promise<any> {
     const result = await this.customerModel.updateOne(
       { customerId: id },
       { $set: data }

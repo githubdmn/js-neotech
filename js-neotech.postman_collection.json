@@ -1,0 +1,127 @@
+{
+	"info": {
+		"_postman_id": "9500d36b-488e-489b-a357-91d6fe048941",
+		"name": "js-neotech",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10205969",
+		"_collection_link": "https://planetary-meteor-43388.postman.co/workspace/My-Workspace~1e78eed1-3045-4ad2-8b2d-f6a7310a9e01/collection/10205969-9500d36b-488e-489b-a357-91d6fe048941?action=share&source=collection_link&creator=10205969"
+	},
+	"item": [
+		{
+			"name": "transaction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n  {\n    \"value\": 110,\n    \"latency\": 600,\n    \"customerId\": \"655a54b15c3aadef255aa488\"\n  },\n  {\n    \"value\": 70,\n    \"latency\": 250,\n    \"customerId\": \"655a54b15c3aadef255aa488\"\n  },\n  {\n    \"value\": 200,\n    \"latency\": 850,\n    \"customerId\": \"655a54b15c3aadef255aa488\"\n  },\n  {\n    \"value\": 120,\n    \"latency\": 1000,\n    \"customerId\": \"655a54b15c3aadef255aa488\"\n  },\n  {\n    \"value\": 20,\n    \"latency\": 50,\n    \"customerId\": \"655a54b15c3aadef255aa488\"\n  },\n  {\n    \"value\": 40,\n    \"latency\": 100,\n    \"customerId\": \"655a54b15c3aadef255aa488\"\n  }\n]\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/wallet-api/transaction",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"wallet-api",
+						"transaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "customer-id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "695315ba-0b60-45e4-b70a-2d52698f459c",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/wallet-api/customer/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"wallet-api",
+						"customer",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "655a54b15c3aadef255aa488"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "customer-id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/wallet-api/customer/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"wallet-api",
+						"customer",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "customer-id",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/wallet-api/customer/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"wallet-api",
+						"customer",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

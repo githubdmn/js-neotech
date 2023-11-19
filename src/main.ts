@@ -20,9 +20,8 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle("Neotech")
-    .setDescription("TASK")
+    .setDescription("Neotech task")
     .setVersion("1.0")
-    .addTag("nestjs")
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

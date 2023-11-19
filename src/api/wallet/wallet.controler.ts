@@ -7,13 +7,26 @@ import {
   Get,
   Delete,
   Patch,
+  Request,
+  UseInterceptors,
 } from "@nestjs/common";
 import { ApiKeyAuthGuard } from "@/guard";
 import { WalletService } from "./wallet.service";
 import { TransactionDto } from "@/dto";
 
+import {
+  ApiTags,
+  ApiOperation,
+  ApiCreatedResponse,
+  ApiBadRequestResponse,
+  ApiOkResponse,
+  ApiResponse,
+} from "@nestjs/swagger";
+import { ApiKeyInterceptor } from "@/interceptor";
+
+@ApiTags("Wallet API")
 @Controller("wallet-api")
-// @UseGuards(ApiKeyAuthGuard)
+@UseGuards(ApiKeyAuthGuard)
 export class WalletApiController {
   constructor(private readonly walletService: WalletService) {}
 
@@ -24,9 +37,20 @@ export class WalletApiController {
     await this.walletService.processTransactions(transactions);
   }
 
+  @UseInterceptors(ApiKeyInterceptor)
   @Get("customer/:id")
-  async getCustomer(@Param("id") id: string): Promise<any> {
-    return this.walletService.getCustomerDetails(id);
+  async getCustomer(
+    @Request() request: any,
+    @Param("id") id: string
+  ): Promise<any> {
+    const apiKey = request.apiKey;
+    const customer = await this.walletService.getCustomerDetails(id);
+    if (apiKey) return customer;
+    else
+      return {
+        first_name: customer.first_name,
+        last_name: customer.last_name,
+      };
   }
 
   @Delete("customer/:id")
