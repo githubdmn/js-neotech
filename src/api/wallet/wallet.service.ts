@@ -1,12 +1,12 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { ProcessorService } from "@/api/processor/processor.service";
+import { ProcessorService } from "../processor/processor.service";
 import {
   GetCustomerResponseDto,
   TransactionDto,
   UpdateCustomerDTO,
 } from "@/dto";
 import { InjectModel } from "@nestjs/mongoose";
-import { Customer, CustomerDocument } from "@/models";
+import { Customer, CustomerDocument } from "../../models";
 import { Document, Model } from "mongoose";
 
 @Injectable()

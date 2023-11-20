@@ -3,7 +3,7 @@ import { MessagePattern } from "@nestjs/microservices";
 import { TransactionDto } from "@/dto";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
-import { Customer, CustomerDocument } from "@/models";
+import { Customer, CustomerDocument } from "../../models";
 import { IProcessor } from "./processor.inteface";
 
 @Injectable()
