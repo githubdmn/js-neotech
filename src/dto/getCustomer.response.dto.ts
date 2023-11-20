@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsInt, IsString } from "class-validator";
 
-export default class UpdateCustomerDTO {
+export default class GetCustomerResponseDto {
   @IsString()
   @ApiProperty()
   first_name: string;

@@ -1,3 +1,11 @@
-import TransactionDto from './transaction.dto';
+import GetCustomerResponseDto from "./getCustomer.response.dto";
+import GetCustomerResponseUnauthorizedDto from "./getCustomerUnauth.response.dto";
+import TransactionDto from "./transaction.dto";
+import UpdateCustomerDTO from "./updateCustomer.dto";
 
-export { TransactionDto };
+export {
+  TransactionDto,
+  GetCustomerResponseUnauthorizedDto,
+  GetCustomerResponseDto,
+  UpdateCustomerDTO,
+};

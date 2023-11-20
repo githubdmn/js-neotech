@@ -1,6 +1,10 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { ProcessorService } from "@/api/processor/processor.service";
-import { TransactionDto } from "@/dto";
+import {
+  GetCustomerResponseDto,
+  TransactionDto,
+  UpdateCustomerDTO,
+} from "@/dto";
 import { InjectModel } from "@nestjs/mongoose";
 import { Customer, CustomerDocument } from "@/models";
 import { Document, Model } from "mongoose";
@@ -49,12 +53,12 @@ export class WalletService {
     return chunks;
   }
 
-  async getCustomerDetails(id: string): Promise<any> {
+  async getCustomerDetails(id: string): Promise<GetCustomerResponseDto> {
     const customer = await this.customerModel.findById(id);
     if (!customer) {
       throw new NotFoundException(`Customer with ID ${id} not found`);
     }
-    return customer;
+    return customer as GetCustomerResponseDto;
   }
 
   async deleteCustomer(id: string): Promise<any> {
@@ -64,13 +68,9 @@ export class WalletService {
     else return result;
   }
 
-  async updateCustomer(id: string, data: any): Promise<any> {
-    const result = await this.customerModel.updateOne(
-      { customerId: id },
-      { $set: data }
-    );
-    if (result.modifiedCount === 0) {
-      throw new NotFoundException(`Customer with ID ${id} not found`);
-    }
+  async updateCustomer(id: string, data: UpdateCustomerDTO): Promise<any> {
+    return await this.customerModel.findByIdAndUpdate(id, {
+      $set: data,
+    });
   }
 }
