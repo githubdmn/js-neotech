@@ -6,7 +6,8 @@
   "scripts": {
     "build": "nest build",
     "start:dev": "nest start --watch",
-    "start:prod": "node ."
+    "start:prod": "node .",
+    "test:e2e": "jest --config ./jest-e2e.json"
   },
   "repository": "git@github.com:githubdmn/js-neotech.git",
   "author": "@githubdmn",
@@ -30,6 +31,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^5.0.5",
     "rxjs": "^7.2.0",
+    "supertest": "^6.3.3",
     "ts-jest": "^29.1.1",
     "webpack": "^5.89.0"
   },
