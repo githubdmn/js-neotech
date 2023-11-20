@@ -1,0 +1,15 @@
+{
+  "testEnvironment": "node",
+  "testRegex": ".e2e-spec.ts$",
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx"],
+  "moduleDirectories": ["node_modules", "src"],
+  "moduleNameMapper": {
+    "@nestjs/(.*)": "<rootDir>/node_modules/@nestjs/$1"
+  },
+  "globals": {
+    "ts-jest": {
+      "tsConfig": "tsconfig.json",
+      "diagnostics": false
+    }
+  }
+}
