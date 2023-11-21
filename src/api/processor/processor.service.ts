@@ -1,10 +1,10 @@
 import { Injectable } from "@nestjs/common";
-import { MessagePattern } from "@nestjs/microservices";
 import { TransactionDto } from "@/dto";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { Customer, CustomerDocument } from "../../models";
 import { IProcessor } from "./processor.inteface";
+import { MessagePattern } from "@nestjs/microservices";
 
 @Injectable()
 export class ProcessorService implements IProcessor {
@@ -12,8 +12,10 @@ export class ProcessorService implements IProcessor {
     @InjectModel(Customer.name) private customerModel: Model<CustomerDocument>
   ) {}
 
-  @MessagePattern("process-transaction")
+  @MessagePattern({ cmd: "processTransactions" })
   async processTransactions(transactions: TransactionDto[]): Promise<void> {
+    console.log(transactions);
+
     for (const transaction of transactions) {
       await this.processTransaction(transaction);
     }
