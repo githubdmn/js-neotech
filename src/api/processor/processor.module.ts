@@ -1,11 +1,11 @@
-import { Module } from '@nestjs/common';
-import { ProcessorService } from './processor.service';
-import { Customer, CustomerSchema } from '@/models';
-import { MongooseModule } from '@nestjs/mongoose';
+import { Module } from "@nestjs/common";
+import { ProcessorService } from "./processor.service";
+import { Customer, CustomerSchema } from "@/models";
+import { MongooseModule } from "@nestjs/mongoose";
 
 const Services = [
   {
-    provide: 'PROCESSOR',
+    provide: "PROCESSOR",
     useClass: ProcessorService,
   },
 ];
@@ -14,6 +14,9 @@ const Services = [
   controllers: [],
   providers: [...Services],
   imports: [
+    MongooseModule.forRoot(
+      "mongodb+srv://public:public@cluster0.acf3fvs.mongodb.net/?retryWrites=true&w=majority"
+    ),
     MongooseModule.forFeature([
       { name: Customer.name, schema: CustomerSchema },
     ]),

@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Inject, Injectable, NotFoundException } from "@nestjs/common";
 import { ProcessorService } from "../processor/processor.service";
 import {
   GetCustomerResponseDto,
@@ -8,19 +8,24 @@ import {
 import { InjectModel } from "@nestjs/mongoose";
 import { Customer, CustomerDocument } from "../../models";
 import { Document, Model } from "mongoose";
+import { Client, ClientProxy, Transport } from "@nestjs/microservices";
 
 @Injectable()
 export class WalletService {
   constructor(
-    private readonly processorService: ProcessorService,
+    @Inject("PROCESSOR_SERVICE") private readonly processorService: ClientProxy,
     @InjectModel(Customer.name)
     private customerModel: Model<CustomerDocument>
   ) {}
 
   async processTransactions(transactions: TransactionDto[]): Promise<void> {
+    const pattern = { cmd: "processTransactions" };
     const chunks = this.splitTransactionsIntoChunks(transactions);
     for (const chunk of chunks) {
-      await this.processorService.processTransactions(chunk);
+      console.log(chunk);
+      await this.processorService
+        .send<TransactionDto[]>(pattern, chunk)
+        .toPromise();
     }
   }
 
