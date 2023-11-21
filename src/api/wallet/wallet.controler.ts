@@ -117,7 +117,7 @@ export class WalletApiController {
     }
   }
 
-  @ApiOperation({ summary: "Deletes customer profile" })
+  @ApiOperation({ summary: "Updates customer profile" })
   @ApiHeader({
     name: "api-key",
     required: true,
@@ -127,7 +127,7 @@ export class WalletApiController {
   @Patch("customer/:id")
   async updateCustomer(
     @Param("id") id: string,
-    @Body() data: UpdateCustomerDTO,
+    @Body() data: Partial<UpdateCustomerDTO>,
     @Res() res: Response
   ): Promise<void> {
     try {

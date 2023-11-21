@@ -10,9 +10,9 @@ export class ApiKeyAuthGuard implements CanActivate {
 
   canActivate(context: ExecutionContext): boolean {
     const { method, url } = context.getArgs()[0];
-    if (this.checkArgs(method, url)) return true;
     const request = context.switchToHttp().getRequest();
     const apiKey = request.headers["api-key"];
+    if (!apiKey && this.checkArgs(method, url)) return true;
     return apiKey === "695315ba-0b60-45e4-b70a-2d52698f459c";
   }
 }

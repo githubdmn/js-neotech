@@ -68,7 +68,12 @@ export class WalletService {
     else return result;
   }
 
-  async updateCustomer(id: string, data: UpdateCustomerDTO): Promise<any> {
+  async updateCustomer(
+    id: string,
+    data: Partial<UpdateCustomerDTO>
+  ): Promise<any> {
+    console.log(data);
+
     return await this.customerModel.findByIdAndUpdate(id, {
       $set: data,
     });
